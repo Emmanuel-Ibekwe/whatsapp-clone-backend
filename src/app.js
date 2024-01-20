@@ -33,7 +33,11 @@ app.use(compression());
 
 app.use(expressFileUpload({ useTempFiles: true }));
 
-app.use();
+app.use(
+  cors({
+    origin: "http://localhost:3000"
+  })
+);
 
 app.get("/", (req, res) => {
   res.send("Hello from the server.");
