@@ -48,6 +48,7 @@ app.use(async (req, res, next) => {
 });
 
 app.use(async (error, req, res, next) => {
+  console.log(error);
   const status = error.status || 500;
   const message = error.message;
 
