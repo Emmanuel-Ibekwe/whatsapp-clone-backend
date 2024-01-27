@@ -17,10 +17,10 @@ console.log(process.env.NODE_ENV);
 
 // Mongo debug mode
 
-if (process.env.NODE_ENV !== "production") {
-  // console.log("debug");
-  mongoose.set("debug", true);
-}
+// if (process.env.NODE_ENV !== "production") {
+//   // console.log("debug");
+//   mongoose.set("debug", true);
+// }
 
 mongoose
   .connect(DATABASE_URL)
