@@ -64,3 +64,21 @@ export const createUser = async userData => {
 
   return user.save();
 };
+
+export const signUser = async (email, password) => {
+  const user = await User.findOne({ email: email.toLowerCase() }).lean();
+
+  if (!user) {
+    throw createHttpError.Unauthorized(
+      "User with this email could not be found."
+    );
+  }
+
+  const passwordMatches = await bcrypt.compare(password, user.password);
+
+  if (!passwordMatches) {
+    throw createHttpError.Unauthorized("wrong password.");
+  }
+
+  return user;
+};
