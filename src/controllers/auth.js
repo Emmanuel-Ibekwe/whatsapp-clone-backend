@@ -4,7 +4,6 @@ import { createUser, signUser } from "../services/auth.js";
 import { generateToken, verifyToken } from "../services/token.js";
 import { findUser } from "../services/user.js";
 
-dotenv.config();
 export const signup = async (req, res, next) => {
   try {
     const { name, email, status, picture, password } = req.body;
@@ -35,11 +34,11 @@ export const signup = async (req, res, next) => {
       process.env.REFRESH_TOKEN_SECRET
     );
 
-    // res.cookie("refreshtoken", refresh_token, {
-    //   httpOnly: true,
-    //   path: "api/v1/auth/refreshtoken",
-    //   maxAge: 30 * 24 * 60 * 60 * 1000 //30 days
-    // });
+    res.cookie("refreshtoken", refresh_token, {
+      httpOnly: true,
+      path: "api/v1/auth/refreshtoken",
+      maxAge: 30 * 24 * 60 * 60 * 1000 //30 days
+    });
 
     res.status(201).json({
       message: "signup successful.",

@@ -9,6 +9,7 @@ export const DEFAULT_STATUS = "Hey there! I am using Whatsapp";
 
 export const createUser = async userData => {
   const { name, email, status, picture, password } = userData;
+  console.log(name, email, status);
 
   //   check if fields are empty
   if (!name || !email || !password) {
