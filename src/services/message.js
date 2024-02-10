@@ -33,7 +33,7 @@ export const populateMessage = async id => {
 export const getConvoMessages = async convo_id => {
   const convoMessages = await Message.find({ conversation: convo_id })
     .populate("sender", "name picture email status")
-    .populate("conveersation");
+    .populate("conversation");
 
   if (!convoMessages)
     throw createHttpError.BadRequest("getting conversation messages failed.");
