@@ -22,7 +22,7 @@ export const sendMessage = async (req, res, next) => {
     };
 
     let newMessage = await createMessage(msgData);
-    const populatedMessage = await populateMessage(newMessage);
+    const populatedMessage = await populateMessage(newMessage._id);
     await updateLatestmessage(convo_id, newMessage);
     res.status(200).json(populatedMessage);
   } catch (error) {
