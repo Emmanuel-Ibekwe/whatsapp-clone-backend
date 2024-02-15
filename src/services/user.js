@@ -6,3 +6,13 @@ export const findUser = async userId => {
   if (!user) throw createHttpError.Unauthorized("Not authorized.");
   return user;
 };
+
+export const regexSearchUsers = async keyword => {
+  const users = await User.find({
+    $or: [
+      { name: { $regex: keyword, $options: "i" } },
+      { name: { $regex: keyword, $options: "i" } }
+    ]
+  });
+  return users;
+};
