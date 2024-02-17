@@ -8,7 +8,7 @@ export const searchUsers = async (req, res, next) => {
       throw createHttpError.BadRequest("search query not provided.");
     }
 
-    const users = await regexSearchUsers(keyword);
+    const users = await regexSearchUsers(keyword, req.user.userId);
     res.status(200).json(users);
   } catch (error) {
     if (!error.status) {
