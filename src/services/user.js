@@ -7,12 +7,12 @@ export const findUser = async userId => {
   return user;
 };
 
-export const regexSearchUsers = async keyword => {
+export const regexSearchUsers = async (keyword, userId) => {
   const users = await User.find({
     $or: [
       { name: { $regex: keyword, $options: "i" } },
-      { name: { $regex: keyword, $options: "i" } }
+      { email: { $regex: keyword, $options: "i" } }
     ]
-  });
+  }).find({ _id: { $ne: userId } });
   return users;
 };
