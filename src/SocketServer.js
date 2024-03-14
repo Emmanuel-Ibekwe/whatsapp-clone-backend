@@ -1,5 +1,5 @@
 let onlineUsers = [];
-export default function(socket) {
+export default function(socket, io) {
   // user joins or opens the application
   socket.on("join", user => {
     console.log("user has joined: ", user);
@@ -11,13 +11,13 @@ export default function(socket) {
     }
 
     // send online users to frontend
-    socket.emit("get-online-users", onlineUsers);
+    io.emit("get-online-users", onlineUsers);
   });
 
   socket.on("disconnect", () => {
     onlineUsers = onlineUsers.filter(user => user.socketId !== socket.id);
     console.log(`user has just disconnected`);
-    socket.emit("get-online-users", onlineUsers);
+    io.emit("get-online-users", onlineUsers);
   });
 
   // join a conversation
